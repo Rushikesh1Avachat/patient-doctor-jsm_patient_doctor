@@ -32,9 +32,9 @@ type PatientFormValues = z.infer<typeof PatientFormValidation>;
 type RegisterFormProps = {
   user: {
     $id: string;
-    name: string;
+    name: string ;
     email: string;
-    phone: string;
+    phone: string ;
   };
 };
 

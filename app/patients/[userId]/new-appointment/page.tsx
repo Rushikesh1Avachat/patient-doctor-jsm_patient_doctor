@@ -1,5 +1,6 @@
 import { AppointmentForm } from "@/components/AppointmentForm";
 import { getPatient } from "@/lib/actions/patient.action";
+import { PageProps } from "@/types";
 import Image from "next/image";
 
 

@@ -1,31 +1,44 @@
+// types.d.ts
+
 /* eslint-disable no-unused-vars */
-interface PageProps {
-  appointmentId: string;
+
+// Use this in server components like page.tsx
+type PageProps= {
   params: {
     userId: string;
   };
   searchParams?: {
-    appointmentId?: string;
-  }
+    [key: string]: string | string[] | undefined;
+  };
+   searchParamsappointment?: {
+    [key: string]: string | string[] | undefined;
+  };
 }
-declare type SearchParamProps = {
+
+// Use this if you need generic key-value access for searchParams
+export type SearchParamProps = {
   params: { [key: string]: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-declare type Gender = "male" | "female" | "other";
-declare type Status = "pending" | "scheduled" | "cancelled";
+export type Gender = "male" | "female" | "other";
+export type Status = "pending" | "scheduled" | "cancelled";
 
-declare interface CreateUserParams {
+// User Creation
+export interface CreateUserParams {
+  user?:string | undefined,
   name: string;
   email: string;
   phone: string;
 }
-declare interface User extends CreateUserParams {
+
+// Logged-in User
+export interface User extends CreateUserParams {
   $id: string;
 }
 
-declare interface RegisterUserParams extends CreateUserParams {
+// Registration Form
+export interface RegisterUserParams extends CreateUserParams {
   userId: string;
   birthDate: Date;
   gender: Gender;
@@ -36,30 +49,32 @@ declare interface RegisterUserParams extends CreateUserParams {
   primaryPhysician: string;
   insuranceProvider: string;
   insurancePolicyNumber: string;
-  allergies: string | undefined;
-  currentMedication: string | undefined;
-  familyMedicalHistory: string | undefined;
-  pastMedicalHistory: string | undefined;
-  identificationType: string | undefined;
-  identificationNumber: string | undefined;
-  identificationDocument: FormData | undefined;
+  allergies?: string;
+  currentMedication?: string;
+  familyMedicalHistory?: string;
+  pastMedicalHistory?: string;
+  identificationType?: string;
+  identificationNumber?: string;
+  identificationDocument?: FormData;
   privacyConsent: boolean;
 }
 
-declare type CreateAppointmentParams = {
+// Create Appointment
+export type CreateAppointmentParams = {
   userId: string;
   patient: string;
   primaryPhysician: string;
   reason: string;
   schedule: Date;
   status: Status;
-  note: string | undefined;
+  note?: string;
 };
 
-declare type UpdateAppointmentParams = {
+// Update Appointment
+export type UpdateAppointmentParams = {
   appointmentId: string;
   userId: string;
   timeZone: string;
   appointment: Appointment;
-  type: string;
+  type: "update" | "reschedule" | "cancel";
 };

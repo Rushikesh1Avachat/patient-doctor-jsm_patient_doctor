@@ -1,13 +1,19 @@
-import Image from "next/image";
-
-import { AppointmentForm } from "@/components/forms/AppointmentForm";
+import { PageProps } from "@/types"; // Make sure this path matches your project structure
+import { AppointmentForm } from "@/components/AppointmentForm";
 import { getPatient } from "@/lib/actions/patient.action";
+import Image from "next/image";
+import { redirect } from "next/navigation";
 
-const Appointment = async ({params,searchParams,appointmentId}:  PageProps) => {
-    const userId = params.userId;
-  const appointmentIds = searchParams?.appointmentId ?? "";
+const Appointment = async ({ params, searchParams }: PageProps) => {
+  const userId = params.userId;
+  const appointmentId = searchParams?.appointmentId || "";
+
   const patient = await getPatient(userId);
-console.log(appointmentIds);
+
+  if (!patient) {
+    // Optionally redirect or show error
+    redirect("/not-found"); // Customize as needed
+  }
 
   return (
     <div className="flex h-screen max-h-screen">
@@ -22,9 +28,11 @@ console.log(appointmentIds);
           />
 
           <AppointmentForm
-            patientId={patient?.$id}
+            patientId={patient.$id}
             userId={userId}
             type="create"
+            //@ts-ignore
+            appointment={appointmentId}
           />
 
           <p className="copyright mt-10 py-12">© 2024 CarePluse</p>
