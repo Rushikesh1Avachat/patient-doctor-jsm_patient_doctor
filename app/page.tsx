@@ -4,12 +4,10 @@ import Link from "next/link";
 import { PasskeyModal } from "@/components/PasskeyModal";
 import PatientForm from "@/components/forms/PatientForm";
 
-const Home = ({
-  searchParams, // searchParams is provided as a prop
-}: {
-  searchParams: { admin: string }; // Type the searchParams prop
-}) => {
-   const isAdmin = searchParams?.admin==="true";
+const Home = ({ searchParams }: PageProps) => {
+  //  co  const admin = searchParams?.admin ?? "";
+ const admin = searchParams?.admin ?? "";
+  const isAdmin = searchParams?.admin === "true";
 
   return (
     <div className="flex h-screen max-h-screen">
