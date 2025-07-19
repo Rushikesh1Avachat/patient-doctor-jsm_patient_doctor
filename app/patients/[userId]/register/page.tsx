@@ -4,11 +4,6 @@ import RegisterForm from "@/components/forms/RegisterForm";
 import { getPatient } from "@/lib/actions/patient.action";
 import { getLoggedInUser } from "@/lib/actions/user.action";
 
-interface PageProps {
-  params: {
-    userId: string;
-  };
-}
 
 const Register = async ({ params }: PageProps) => {
   const { userId } = params;

@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 interface PageProps {
+  appointmentId: string;
   params: {
     userId: string;
   };
   searchParams?: {
     appointmentId?: string;
-  };
+  }
 }
 declare type SearchParamProps = {
   params: { [key: string]: string };
