@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-
 import { PasskeyModal } from "@/components/PasskeyModal";
 import PatientForm from "@/components/forms/PatientForm";
 
