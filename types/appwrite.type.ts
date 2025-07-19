@@ -1,4 +1,5 @@
 import { Models } from "node-appwrite";
+import { number } from "zod";
 
 export interface Patient extends Models.Document {
   userId: string;
@@ -33,4 +34,24 @@ export interface Appointment extends Models.Document {
   note: string;
   userId: string;
   cancellationReason: string | null;
+}
+export async function createAccount({
+  email,
+  password,
+  name,
+  phone
+}: {
+  email: string;
+  password: string;
+  name: string;
+  phone:number
+}) {
+  try {
+    //@ts-ignore
+    const response = await account.create(ID.unique(), email, password, name,phone);
+    return response;
+  } catch (error: any) {
+    console.error("Account creation failed:", error.message);
+    throw error;
+  }
 }

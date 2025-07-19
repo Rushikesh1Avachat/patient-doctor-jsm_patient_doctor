@@ -1,14 +1,23 @@
-import Image from "next/image";
+import { getPatient } from "@/lib/actions/patient.action";
+
 import { redirect } from "next/navigation";
-
+import Image from "next/image";
 import RegisterForm from "@/components/forms/RegisterForm";
-import { getPatient, getUser } from "@/lib/actions/patient.action";
+import { createAccount } from "@/types/appwrite.type";
 
-const Register = async ({ params: { userId } }: SearchParamProps) => {
-  const user = await getUser(userId);
+type RegisterProps = {
+  params: {
+    userId: string;
+  };
+};
+
+const Register = async ({ params }: RegisterProps) => {
+  const { userId } = params;
+
   const patient = await getPatient(userId);
-
   if (patient) redirect(`/patients/${userId}/new-appointment`);
+//@ts-ignore
+  const user = await createAccount(); // Fetch logged-in user with required fields
 
   return (
     <div className="flex h-screen max-h-screen">
