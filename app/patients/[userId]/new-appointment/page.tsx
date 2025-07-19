@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { AppointmentForm } from "@/components/AppointmentForm";
-import { getPatient } from "@/lib/actions/patient.actions";
+import { getPatient } from "@/lib/actions/patient.action";
 interface PageProps {
   params: {
     userId: string;
