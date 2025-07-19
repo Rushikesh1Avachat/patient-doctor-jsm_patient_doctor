@@ -1,20 +1,13 @@
-import Image from "next/image";
-
 import { AppointmentForm } from "@/components/AppointmentForm";
 import { getPatient } from "@/lib/actions/patient.action";
-interface PageProps {
-  params: {
-    userId: string;
-  };
-  searchParams?: {
-    [key: string]: string | string[] | undefined;
-  };
-}
+import Image from "next/image";
 
 const Appointment = async ({ params, searchParams }: PageProps) => {
- const { userId } = params;
-  const appointmentId = searchParams?.appointmentId as string | undefined;
-  const patient= await getPatient(userId)
+  const { userId } = params;
+  const appointmentId = (searchParams?.appointmentId as string) || "";
+
+  const patient = await getPatient(userId);
+
   return (
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container my-auto">
@@ -47,6 +40,4 @@ const Appointment = async ({ params, searchParams }: PageProps) => {
     </div>
   );
 };
-
-export default Appointment;
-
+export default Appointment
