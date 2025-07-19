@@ -1,13 +1,11 @@
 /* eslint-disable no-unused-vars */
 
-
-interface SearchParamProps  {
-   params: { [key: string]: string }; // <-- THIS IS LIKELY THE PROBLEM FOR app/page.tsx
-  searchParams?: { [key: string]: string | string[] | undefined };
-
+declare type SearchParamProps = {
+  params: { [key: string]: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
-declare type Gender = "male" | "female" | "other";
+declare type Gender = "Male" | "Female" | "Other";
 declare type Status = "pending" | "scheduled" | "cancelled";
 
 declare interface CreateUserParams {
