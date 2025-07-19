@@ -1,10 +1,19 @@
+import Image from "next/image";
 import { AppointmentForm } from "@/components/AppointmentForm";
 import { getPatient } from "@/lib/actions/patient.action";
-import Image from "next/image";
+
+interface PageProps {
+  params: {
+    userId: string;
+  };
+  searchParams?: {
+    appointmentId?: string;
+  };
+}
 
 const Appointment = async ({ params, searchParams }: PageProps) => {
   const { userId } = params;
-  const appointmentId = (searchParams?.appointmentId as string) || "";
+  const appointmentId = searchParams?.appointmentId ?? "";
 
   const patient = await getPatient(userId);
 
@@ -21,7 +30,7 @@ const Appointment = async ({ params, searchParams }: PageProps) => {
           />
 
           <AppointmentForm
-            patientId={patient?.$id}
+            patientId={patient?.$id || ""}
             userId={userId}
             type="create"
           />
@@ -40,4 +49,5 @@ const Appointment = async ({ params, searchParams }: PageProps) => {
     </div>
   );
 };
-export default Appointment
+
+export default Appointment;

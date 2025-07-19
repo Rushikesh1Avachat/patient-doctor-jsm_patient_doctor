@@ -1,14 +1,27 @@
-import Image from "next/image";
 import { redirect } from "next/navigation";
-
+import Image from "next/image";
 import RegisterForm from "@/components/forms/RegisterForm";
-import { getPatient, getUser } from "@/lib/actions/patient.action";
+import { getPatient } from "@/lib/actions/patient.action";
+import { getLoggedInUser } from "@/lib/actions/user.action";
 
-const Register = async ({ params: { userId } }: SearchParamProps) => {
-  const user = await getUser(userId);
+interface PageProps {
+  params: {
+    userId: string;
+  };
+}
+
+const Register = async ({ params }: PageProps) => {
+  const { userId } = params;
+  const user = await getLoggedInUser();
+
+  if (!user) {
+    redirect("/sign-in"); // Or show an error page
+  }
+
   const patient = await getPatient(userId);
-
-  if (patient) redirect(`/patients/${userId}/new-appointment`);
+  if (patient) {
+    redirect(`/patients/${userId}/new-appointment`);
+  }
 
   return (
     <div className="flex h-screen max-h-screen">
@@ -40,3 +53,4 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
 };
 
 export default Register;
+

@@ -1,7 +1,10 @@
 /* eslint-disable no-unused-vars */
-type PageProps = {
+type Props = {
+  params: {
+    userId: string;
+  };
   searchParams?: Record<string, string | string[] | undefined>;
-  params: { userId: string };
+  
 };
 declare type SearchParamProps = {
   params: { [key: string]: string };
