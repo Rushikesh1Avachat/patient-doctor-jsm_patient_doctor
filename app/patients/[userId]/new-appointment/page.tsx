@@ -28,13 +28,11 @@ const Appointment = async ({ params, searchParams }: PageProps) => {
             alt="logo"
             className="mb-12 h-10 w-fit"
           />
-
           <AppointmentForm
             patientId={patient?.$id || ""}
             userId={userId}
             type="create"
           />
-
           <p className="copyright mt-10 py-12">© 2024 CarePluse</p>
         </div>
       </section>
