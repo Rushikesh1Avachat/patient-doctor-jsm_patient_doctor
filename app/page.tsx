@@ -1,12 +1,13 @@
-import PatientForm from "@/components/forms/PatientForm";
 import Image from "next/image";
 import Link from "next/link";
 
 
 import { PasskeyModal } from "@/components/PasskeyModal";
+import PatientForm from "@/components/forms/PatientForm";
 
 const Home = ({ searchParams }: SearchParamProps) => {
   const isAdmin = searchParams?.admin === "true";
+  const query = searchParams?.query;
 
   return (
     <div className="flex h-screen max-h-screen">
